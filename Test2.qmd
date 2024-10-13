@@ -1,0 +1,33 @@
+---
+title: "Test2"
+runtime: shiny
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+```{r}
+library(shiny)
+library(quarto)
+
+ui <- fluidPage(
+    titlePanel("Test de Publication"),
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("num", "Choisissez un nombre :", 1, 100, 50)
+        ),
+        mainPanel(
+            textOutput("result")
+        )
+    )
+)
+
+server <- function(input, output) {
+    output$result <- renderText({
+        paste("Vous avez choisi le nombre :", input$num)
+    })
+}
+
+shinyApp(ui = ui, server = server)
+```
